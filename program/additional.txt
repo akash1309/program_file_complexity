@@ -1,0 +1,315 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+int check=0,i1,j1,b1,c1,l1;
+char name[200],text[200];
+/*#### #######
+#
+ #### ###
+ #### ######
+ #########################
+ ###############
+ #
+# ##############
+# #################
+ #
+##########
+#
+*/
+void occ(char str[],char substr[],int line)
+{ // ########### ###
+   
+    b=strlen(str);
+    c=strlen(substr);
+	for(i=0;i< b-c;i++)
+	{  for(j=0;j<c;j++)
+	    {   if(substr[j]!=str[i+j])
+	        break;
+		}
+
+      	 if(j==c)
+        	 { //##############
+                if(i==0)
+                 {
+                    if((str[i+c]<97)||(str[i+c]>122))
+                     {
+                          if((str[i+c]<65)||(str[i+c]>90))
+                          printf("######################################",substr,i,line);
+                      }
+                 }
+                 else
+                 {
+
+	                	if((str[i-1]<97)||(str[i-1]>122))
+	                	{
+	                 		if((str[i+c]<97)||(str[i+c]>123))
+	                		{
+	                		    if((str[i-1]<65)||(str[i-1]>90))
+	                		        {
+	                		        	if((str[i+c]<65)||(str[i+c]>90))
+	                		        	{
+	                		        		printf("######################################",substr,i,line);
+	                	                    sett=1;
+										}
+									}
+
+		                	 }
+		                }
+     	         }
+
+             }
+	}
+}
+
+void occurence(char filename[])
+{	FILE *fp,*in;
+	char *pos;
+    
+	fp=fopen(filename,"");
+	in=fopen("########","");
+	fgets(name,199,in);
+	while(!feof(in))
+	{
+		if ( (pos=strchr(name, '\n')) != NULL  )
+		*pos='\0';
+		rewind(fp);
+		line=0;
+	 //   #####################
+	while(!feof(fp))
+		{   sett=0;
+			fgets(text,200,fp);
+				line++;
+      //  ########## ##########
+           if(strcmp(name,"")!=0)
+			occ(text,name,line);
+
+
+		}
+	fgets(name,199,in);
+	//########### ################
+}
+	fclose(fp);
+	fclose(in);
+}
+/*
+#### ########## ######
+#  
+        ##########################
+         #
+           ###############
+            #
+             #######
+            #
+          #
+
+  #### #####
+############################
+#### ######
+##### ######## #################
+    #### #######
+#####################
+    ########### ## #####
+#   #
+###    ##########
+##    # #
+##     # ####################################################################################
+#                  ######
+
+#         #
+#         ####
+#            #  ##########################
+              #
+### #####################
+#   #
+#############
+#
+*/
+void check(char str[])
+{
+     int i;
+         for(i=0;i<strlen(str);i++)
+          {
+            if(str[i]=='(')
+             {
+              return;
+             }
+           }
+
+
+
+   FILE *var;
+	var=fopen("########","");
+	int set=0;
+	char s[]="####";
+    char *token;
+	token=strtok(str,s);
+    while(token != NULL)
+	   {
+			 if(set==0)
+		    	 {
+		     	 	if((strcmp(token,"##")==0)||(strcmp(token,"####")==0)||(strcmp(token,"###")==0))
+	                  set=1;
+	             //   ####
+               // ######
+              }
+	         else
+	            {
+                char str[100];
+                strcpy(str,token);
+                int len=strlen(str);
+                int k=0,p=0;
+                char substr[50];
+                while(k<len)
+                {
+                  if((((str[k]-'A')>=0)&&((str[k]-'A')<=25))||(((str[k]-'a')>=0)&&((str[k]-'a')<=25)))
+                  {  substr[p]=str[k];
+                     p++;
+                  }
+                  else
+                  {  substr[p]='\0';
+
+
+                    break;
+                  }
+                  k++;
+
+                }
+                if(p!=0)
+               fprintf(var,"###",substr);
+              //  ######################
+
+	                    //#########################
+					// ##########################
+		    }
+			 token=strtok(NULL,s);
+	   }
+	fclose(var);
+}
+int main()
+{
+	char line[200],str[200];
+	FILE *fp;
+	FILE *f=fopen("########","");
+    fclose(f);
+	printf("##############");
+	char filename[20];
+    gets(filename);
+	fp=fopen(filename,"");
+	if(fp==NULL)
+	printf("####################");
+	else
+	{    FILE *pre=fopen("#############","");
+	     char ch1,ch2;
+	     ch1=getc(fp);
+	    //#############
+    //#######################
+    while((ch2=getc(fp))!=EOF)
+	     {
+	        if((ch1=='/')&&(ch2=='*'))
+	        {
+			         fprintf(pre,"###",'/','*');
+				       ch1=getc(fp);
+		           ch2=getc(fp);
+		           while(ch2!=EOF)
+		            {  //########## #######
+	                if((ch1=='*')&&(ch2=='/'))
+		                 { fprintf(pre,"###",'*','/');
+		                    ch2=fgetc(fp);
+		                    ch1=ch2;
+					            	 break;
+				             }
+				           // #############
+                   if(ch2=='\n')
+                    {fprintf(pre,"###",ch1,'\n');
+                     ch2=getc(fp);
+                     }
+		                	 else
+		               	 {
+						              if(ch1==' ')
+		                   	  fprintf(pre,"#",' ');
+		                  	  else
+						              fprintf(pre,"#",'#');
+					           }
+		                   	 ch1=ch2;
+		                  	 ch2=getc(fp);
+		  	        }
+
+	               if(ch2==EOF)
+	               break;
+			    }
+		    	else
+			    {  if((ch1=='/')&&(ch2=='/'))
+	                {  fprintf(pre,"###",'/','/');
+				             ch1=getc(fp);
+		                 ch2=getc(fp);
+		                 while(ch2!=EOF)
+		                  {  //########## #######
+
+				                  if(ch2=='\n')
+				                   {
+				                  		 fprintf(pre,"###",ch1,'\n');
+                               ch2=getc(fp);
+				                   		 break;
+				           	       }
+		                    	 else
+		                     	 {
+				    		                if(ch1==' ')
+		                        	  fprintf(pre,"#",' ');
+		                          	else
+				        		            fprintf(pre,"#",'#');
+				     	             }
+		                  	    ch1=ch2;
+		            	          ch2=getc(fp);
+		  	              }
+
+	                    if(ch2==EOF)
+	                    break;
+		     	        }
+
+				        else
+			        	{
+                     if(ch1=='"##############################################################"%c"#"');
+                       while((ch1=fgetc(fp)) !=EOF)
+                       {   if(ch1=='"############################################"%c"#"');
+                             ch2=getc(fp);
+                             ch1=ch2;
+                             break;
+                           }
+                           else
+                           {
+                             fprintf(pre,"#",'#');
+                           }
+
+                       }
+                       if(ch1==EOF)
+                       break;
+                     }
+				            else
+                     {
+			              	 fprintf(pre,"#",ch1);
+                       ch1=ch2;
+
+                    }
+
+		       	    }
+
+		 }
+   }
+     fclose(pre);
+	  }
+
+
+		 fclose(fp);
+		 FILE *pr=fopen("#############","");
+		while(!feof(pr))
+	    {
+	       fgets(str,199,pr);
+	       check(str);
+        }
+        //  ########
+	occurence("#############");
+	   // ####################
+
+
+	return 0;
+}

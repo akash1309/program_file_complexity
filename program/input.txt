@@ -1,0 +1,16 @@
+check
+i1
+j1
+b1
+c1
+l1
+name
+text
+i
+token
+str
+k
+p
+substr
+ch1
+ch2
